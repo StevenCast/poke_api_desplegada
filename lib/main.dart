@@ -11,7 +11,14 @@ class PokemonApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Pokémon API',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(
+        primarySwatch: Colors.teal,
+        textTheme: TextTheme(
+          bodyLarge: TextStyle(fontSize: 16, color: Colors.white),
+          bodyMedium: TextStyle(fontSize: 14, color: Colors.white.withOpacity(0.7)),
+        ),
+        scaffoldBackgroundColor: Colors.teal.shade50,
+      ),
       home: PokemonList(),
     );
   }
@@ -145,112 +152,163 @@ Código postal: ${data['zip']}
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lista de Pokémon'),
+        backgroundColor: Colors.teal.shade800,
+        title: Text(
+          'Lista de Pokémon',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
-      body: Column(
-        children: [
-          // Barra de búsqueda para IP
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _ipSearchController,
-                    decoration: InputDecoration(
-                      hintText: 'Ingresa la IP...',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Barra de búsqueda para IP
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _ipSearchController,
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                        hintText: 'Ingresa la IP...',
+                        hintStyle: TextStyle(color: Colors.black.withOpacity(0.6)),
+                        fillColor: Colors.teal.shade100,
+                        filled: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding: EdgeInsets.symmetric(vertical: 14, horizontal: 20),
                       ),
                     ),
                   ),
-                ),
-                IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: _fetchIpInfo,
-                ),
-              ],
+                  IconButton(
+                    icon: Icon(Icons.search, color: Colors.black),
+                    onPressed: _fetchIpInfo,
+                  ),
+                ],
+              ),
             ),
-          ),
-          // Mostrar la información de la IP
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              _ipInfo,
-              style: TextStyle(fontSize: 14),
+            // Mostrar la información de la IP
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                _ipInfo,
+                style: TextStyle(fontSize: 14, color: Colors.black),
+              ),
             ),
-          ),
-          // Barra de búsqueda para Pokémon
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: double.infinity,
+            // Barra de búsqueda para Pokémon
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: TextField(
                 controller: _searchController,
+                style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
                   hintText: 'Buscar Pokémon...',
+                  hintStyle: TextStyle(color: Colors.black.withOpacity(0.6)),
+                  fillColor: Colors.teal.shade100,
+                  filled: true,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
                   ),
+                  contentPadding: EdgeInsets.symmetric(vertical: 14, horizontal: 20),
                 ),
               ),
             ),
-          ),
-          // Mostrar la lista de Pokémon o indicador de carga
-          _isLoading
-              ? Center(child: CircularProgressIndicator())
-              : Expanded(
-                  child: ListView.builder(
-                    itemCount: _filteredPokemonList.length,
-                    itemBuilder: (context, index) {
-                      final pokemon = _filteredPokemonList[index];
-                      return ListTile(
-                        leading: pokemon['image'] != null
-                            ? Image.network(pokemon['image'])
-                            : Icon(Icons.image_not_supported),
-                        title: Text(pokemon['name']),
-                        onTap: () {
-                          _showPokemonDetails(context, pokemon);
-                        },
-                      );
-                    },
+            // Mostrar la lista de Pokémon o indicador de carga
+            _isLoading
+                ? Center(child: CircularProgressIndicator())
+                : Expanded(
+                    child: ListView.builder(
+                      itemCount: _filteredPokemonList.length,
+                      itemBuilder: (context, index) {
+                        final pokemon = _filteredPokemonList[index];
+                        return Card(
+                          elevation: 5,
+                          margin: EdgeInsets.symmetric(vertical: 8),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.all(16),
+                            leading: pokemon['image'] != null
+                                ? ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.network(pokemon['image'], width: 50, height: 50, fit: BoxFit.cover),
+                                  )
+                                : Icon(Icons.image_not_supported),
+                            title: Text(
+                              pokemon['name'],
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            onTap: () {
+                              _showPokemonDetails(context, pokemon);
+                            },
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   void _showPokemonDetails(BuildContext context, Map<String, dynamic> pokemon) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(pokemon['name']),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              pokemon['image'] != null
-                  ? Image.network(pokemon['image'])
-                  : Icon(Icons.image_not_supported, size: 50),
-              SizedBox(height: 16),
-              Text('ID: ${pokemon['id']}'),
-              Text('Altura: ${pokemon['height']}'),
-              Text('Peso: ${pokemon['weight']}'),
-              Text('Habilidades: ${pokemon['abilities'].join(', ')}'),
-            ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Cerrar'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(
+          pokemon['name'],
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),  // Título en negro
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            pokemon['image'] != null
+                ? Image.network(pokemon['image'], width: 100, height: 100)
+                : Icon(Icons.image_not_supported, size: 50),
+            SizedBox(height: 16),
+            // Información con texto en color negro
+            Text(
+              'ID: ${pokemon['id']}',
+              style: TextStyle(color: Colors.black),
+            ),
+            Text(
+              'Altura: ${pokemon['height']}',
+              style: TextStyle(color: Colors.black),
+            ),
+            Text(
+              'Peso: ${pokemon['weight']}',
+              style: TextStyle(color: Colors.black),
+            ),
+            Text(
+              'Habilidades: ${pokemon['abilities'].join(', ')}',
+              style: TextStyle(color: Colors.black),
             ),
           ],
-        );
-      },
-    );
-  }
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text('Cerrar', style: TextStyle(color: Colors.black)),  // Botón en negro
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
 }
