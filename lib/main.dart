@@ -3,10 +3,12 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 void main() {
-  runApp(PokemonApp());
+  runApp(const PokemonApp());
 }
 
 class PokemonApp extends StatelessWidget {
+  const PokemonApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,17 +16,19 @@ class PokemonApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
         textTheme: TextTheme(
-          bodyLarge: TextStyle(fontSize: 16, color: Colors.white),
+          bodyLarge: const TextStyle(fontSize: 16, color: Colors.white),
           bodyMedium: TextStyle(fontSize: 14, color: Colors.white.withOpacity(0.7)),
         ),
         scaffoldBackgroundColor: Colors.teal.shade50,
       ),
-      home: PokemonList(),
+      home: const PokemonList(),
     );
   }
 }
 
 class PokemonList extends StatefulWidget {
+  const PokemonList({super.key});
+
   @override
   _PokemonListState createState() => _PokemonListState();
 }
@@ -33,8 +37,8 @@ class _PokemonListState extends State<PokemonList> {
   List<Map<String, dynamic>> _pokemonList = [];
   List<Map<String, dynamic>> _filteredPokemonList = [];
   bool _isLoading = false;
-  TextEditingController _searchController = TextEditingController();
-  TextEditingController _ipSearchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
+  final TextEditingController _ipSearchController = TextEditingController();
   String _ipInfo = '';
 
   @override
@@ -103,7 +107,7 @@ class _PokemonListState extends State<PokemonList> {
 
   Future<void> _fetchIpInfo() async {
     final ip = _ipSearchController.text;
-    final apiKey = '5bfa51c315854c6f8e968cc048c7fb6b'; // Reemplaza con tu API Key de ipstack
+    const apiKey = '5bfa51c315854c6f8e968cc048c7fb6b'; // Reemplaza con tu API Key de ipstack
     final url = Uri.parse('http://api.ipstack.com/$ip?access_key=$apiKey');
 
     setState(() {
@@ -153,7 +157,7 @@ Código postal: ${data['zip']}
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal.shade800,
-        title: Text(
+        title: const Text(
           'Lista de Pokémon',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
@@ -171,7 +175,7 @@ Código postal: ${data['zip']}
                   Expanded(
                     child: TextField(
                       controller: _ipSearchController,
-                      style: TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.black),
                       decoration: InputDecoration(
                         hintText: 'Ingresa la IP...',
                         hintStyle: TextStyle(color: Colors.black.withOpacity(0.6)),
@@ -181,12 +185,12 @@ Código postal: ${data['zip']}
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide.none,
                         ),
-                        contentPadding: EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+                        contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
                       ),
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.search, color: Colors.black),
+                    icon: const Icon(Icons.search, color: Colors.black),
                     onPressed: _fetchIpInfo,
                   ),
                 ],
@@ -197,7 +201,7 @@ Código postal: ${data['zip']}
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 _ipInfo,
-                style: TextStyle(fontSize: 14, color: Colors.black),
+                style: const TextStyle(fontSize: 14, color: Colors.black),
               ),
             ),
             // Barra de búsqueda para Pokémon
@@ -205,7 +209,7 @@ Código postal: ${data['zip']}
               padding: const EdgeInsets.all(8.0),
               child: TextField(
                 controller: _searchController,
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
                 decoration: InputDecoration(
                   hintText: 'Buscar Pokémon...',
                   hintStyle: TextStyle(color: Colors.black.withOpacity(0.6)),
@@ -215,13 +219,13 @@ Código postal: ${data['zip']}
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide.none,
                   ),
-                  contentPadding: EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
                 ),
               ),
             ),
             // Mostrar la lista de Pokémon o indicador de carga
             _isLoading
-                ? Center(child: CircularProgressIndicator())
+                ? const Center(child: CircularProgressIndicator())
                 : Expanded(
                     child: ListView.builder(
                       itemCount: _filteredPokemonList.length,
@@ -229,21 +233,21 @@ Código postal: ${data['zip']}
                         final pokemon = _filteredPokemonList[index];
                         return Card(
                           elevation: 5,
-                          margin: EdgeInsets.symmetric(vertical: 8),
+                          margin: const EdgeInsets.symmetric(vertical: 8),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: ListTile(
-                            contentPadding: EdgeInsets.all(16),
+                            contentPadding: const EdgeInsets.all(16),
                             leading: pokemon['image'] != null
                                 ? ClipRRect(
                                     borderRadius: BorderRadius.circular(8),
                                     child: Image.network(pokemon['image'], width: 50, height: 50, fit: BoxFit.cover),
                                   )
-                                : Icon(Icons.image_not_supported),
+                                : const Icon(Icons.image_not_supported),
                             title: Text(
                               pokemon['name'],
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
                               ),
@@ -269,7 +273,7 @@ Código postal: ${data['zip']}
       return AlertDialog(
         title: Text(
           pokemon['name'],
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),  // Título en negro
+          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),  // Título en negro
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -277,30 +281,30 @@ Código postal: ${data['zip']}
           children: [
             pokemon['image'] != null
                 ? Image.network(pokemon['image'], width: 100, height: 100)
-                : Icon(Icons.image_not_supported, size: 50),
-            SizedBox(height: 16),
+                : const Icon(Icons.image_not_supported, size: 50),
+            const SizedBox(height: 16),
             // Información con texto en color negro
             Text(
               'ID: ${pokemon['id']}',
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
             Text(
               'Altura: ${pokemon['height']}',
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
             Text(
               'Peso: ${pokemon['weight']}',
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
             Text(
               'Habilidades: ${pokemon['abilities'].join(', ')}',
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
           ],
         ),
         actions: <Widget>[
           TextButton(
-            child: Text('Cerrar', style: TextStyle(color: Colors.black)),  // Botón en negro
+            child: const Text('Cerrar', style: TextStyle(color: Colors.black)),  // Botón en negro
             onPressed: () {
               Navigator.of(context).pop();
             },
