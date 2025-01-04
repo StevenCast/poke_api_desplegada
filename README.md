@@ -10,6 +10,8 @@ Para comenzar, dirígete a Amazon Developer y crea una cuenta de desarrollador. 
 ## Información Inicial de la Aplicación
 Proporciona el título de tu aplicación y selecciona una categoría adecuada (por ejemplo, Social). Después de guardar, se te pedirá completar varios campos necesarios para el envío de la aplicación.
 
+![{418B6742-29F8-489F-8ADF-5CE058016F02}](https://github.com/user-attachments/assets/88aaa1e7-e2ac-4691-b80d-b98040c031ba)
+
 ## Subir el Archivo APK
 Antes de continuar, asegúrate de haber generado el archivo APK de tu aplicación. Para este proyecto, el APK fue creado con Flutter e incluye funciones como la visualización de Pokémon y la localización basada en direcciones IP. Para generar el APK, abre una terminal en el directorio de tu proyecto y ejecuta:
 
