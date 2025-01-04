@@ -36,3 +36,7 @@ Revisa todos los detalles para asegurarte de que sean correctos antes de enviar 
 
 ## Aprobación de la Aplicación
 Una vez enviada, espera a que el equipo de Amazon Appstore revise y apruebe tu aplicación. Tras la aprobación, tu aplicación estará disponible en la tienda para que los usuarios la descarguen.
+![{792F51C4-BE13-49D6-ADBD-3EC19BCC840C}](https://github.com/user-attachments/assets/2c9d7030-9e05-4102-a510-b9b1b809d7ae)
+![{18ACEDD1-5A94-41EF-A1DB-0C784E57C207}](https://github.com/user-attachments/assets/fcd07568-5a10-4075-bbdc-5a4227eb0983)
+
+
