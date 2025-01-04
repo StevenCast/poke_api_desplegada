@@ -55,7 +55,12 @@ Revisa todos los detalles para asegurarte de que sean correctos antes de enviar 
 
 ## Aprobación de la Aplicación
 Una vez enviada, espera a que el equipo de Amazon Appstore revise y apruebe tu aplicación. Tras la aprobación, tu aplicación estará disponible en la tienda para que los usuarios la descarguen.
-![{792F51C4-BE13-49D6-ADBD-3EC19BCC840C}](https://github.com/user-attachments/assets/2c9d7030-9e05-4102-a510-b9b1b809d7ae)
-![{18ACEDD1-5A94-41EF-A1DB-0C784E57C207}](https://github.com/user-attachments/assets/fcd07568-5a10-4075-bbdc-5a4227eb0983)
+![{419890E1-0CFF-4F88-AC9D-A9A418413A4C}](https://github.com/user-attachments/assets/8f435260-33c1-45c4-88c0-d4ddc701a43d)
+![{4464AA3C-995E-48C6-BDBF-C36ABFBC68F1}](https://github.com/user-attachments/assets/f5945235-047e-411b-bb94-b68e7aa0a2eb)
+
+
+#### Enlace a la aplicación
+https://www.amazon.com/dp/B0DS99R6NS/ref=sr_1_1?crid=1MAAGMSK5EXS1&dib=eyJ2IjoiMSJ9.D3lzEdhvtVJNUP9pGs3CqM8XqYcq_WliqTKYQA5SvJNDB0O56IDx87Yu3-CVZVBfAIQoZVe0SZQiciJekByFvQ.ePA-5BiYHe1HIaqgLGzSyn6h6hA0EVLVsuJSI1pQWqw&dib_tag=se&keywords=newpokemonapi+-+steven&qid=1736033055&sprefix=nepokemonapi+-+steven%2Caps%2C497&sr=8-1
+
 
 
